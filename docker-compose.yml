@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: realtyna_web
+    # '/start' is the shell script used to run the service
+    command: /start
+    # this volume is used to map the files and folders on the host to the container
+    # so if we change code on the host, code in the docker container will also be changed
+    volumes:
+      - ./realtyna:/app
+    expose:
+      - 8000
+    # env_file is used to manage the env variables of our project
+    env_file:
+      - ./.env
+    secrets:
+      - secret_key
+    depends_on:
+      - db
+    restart: on-failure
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/local/nginx/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - static_volume:/app/static
+    depends_on:
+      - web
+    restart: on-failure
+
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    secrets:
+      - sql_password
+    restart: "on-failure"
+
+secrets:
+  secret_key:
+    file: ./secrets/secret_key.txt
+  sql_password:
+    file: ./secrets/sql_password.txt
+
+volumes:
+  postgres_data:
+  static_volume:
