@@ -18,18 +18,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Room',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=128)),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='Reservation',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('start_date', models.DateTimeField(validators=[realtybooking.models.validate_start_date])),
-                ('end_date', models.DateTimeField(validators=[realtybooking.models.validate_end_date])),
-                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='realtybooking.room')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('start_date', models.DateTimeField()),
+                ('end_date', models.DateTimeField()),
+                ('room', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='realtybooking.room')),
             ],
         ),
     ]

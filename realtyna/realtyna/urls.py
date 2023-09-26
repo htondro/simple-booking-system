@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from realtybooking import views
+
+router = routers.DefaultRouter()
+router.register(r"room", views.RoomViewSet)
+router.register(r"reservation", views.ReservationViewSet)
+router.register(r"owner", views.OwnerViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('', include(router.urls))
 ]

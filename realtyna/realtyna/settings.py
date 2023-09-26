@@ -130,11 +130,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-BOOKING_TITLE = "Challenge"
-BOOKING_DESC = "Realtyna"
-BOOKING_BG = "img/booking_bg.jpg"
-
-BOOKING_SUCCESS_REDIRECT_URL = "Success redirect url"
-BOOKING_DISABLE_URL = "Redirect to this url if create booking is disable"

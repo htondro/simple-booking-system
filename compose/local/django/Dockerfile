@@ -11,7 +11,6 @@ RUN apk update \
     && apk add libpq-dev \
     # Translations dependencies
     && apk add gettext \
-    && apk add tk \
     # cleaning up unused files
     && rm -vrf /var/cache/apk/*
 
