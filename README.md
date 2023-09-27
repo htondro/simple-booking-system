@@ -29,7 +29,7 @@ As a listing owner, We need a system for making and tracking reservations that c
 ```
 DEBUG= 0
 SECRET_KEY='/run/secrets/secret_key'
-DJANGO_ALLOWED_HOSTS=\*
+DJANGO_ALLOWED_HOSTS=*
 SQL_ENGINE=django.db.backends.postgresql
 SQL_HOST=db
 SQL_PORT=5432
