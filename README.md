@@ -39,14 +39,14 @@ POSTGRES_PASSWORD='/run/secrets/sql_password'
 ```
 
 4. Create a new folder called `secrets` in your project root to set docker secrets.
-   1. Create `secret_key.txt` file in secrets folder and put your considered django secret key as plain text in that file.
-   2. Create `sql_password.txt` file in secrets folder and put your considered SQL password as plain text in that file.
-5. run `docker compose build` in command line at your root project.
-6. run `docker compose exec db psql -U realtyna_user` to get into db shell.
-   1. run `CREATE DATABASE realtyna;` in db shell.
-7. run `docker compose up -d` in command line to run containers.
-8. run `docker compose exec web python manage.py createsuperuser` to create django super user.
-9. Now you can login to django admin dashboard (`localhost/admin`) to CRUD data.
+   1. Create a `secret_key.txt` file in the secrets folder and put your considered django secret key as plain text in that file.
+   2. Create a `sql_password.txt` file in the secrets folder and put your considered SQL password as plain text in that file.
+5. run `docker compose build` in the command line at your root project.
+6. run `docker compose exec db psql -U realtyna_user` to get into the db shell.
+   1. run `CREATE DATABASE realtyna;` in the db shell.
+7. run `docker compose up -d` in the command line to run containers.
+8. run `docker compose exec web python manage.py createsuperuser` to create a django superuser.
+9. Now you can login to the django admin dashboard (`localhost/admin`) to CRUD data.
 
 ## REST API Endpoints
 
@@ -64,10 +64,10 @@ POSTGRES_PASSWORD='/run/secrets/sql_password'
 
 > 1. The system can be used by multiple listings.
 
-You can create multiple listing owners using django admin panel.
+You can create multiple listing owners using the django admin panel.
 
 - Each owner can have multiple rooms with unique names.
-- Two owners may have rooms with same name.
+- Two owners may have rooms with the same name.
 
 > 2. The system provides REST API endpoints:
 >    > 1. To make reservations
