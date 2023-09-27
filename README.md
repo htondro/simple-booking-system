@@ -24,7 +24,7 @@ As a listing owner, We need a system for making and tracking reservations that c
 
 1. [Install Docker](https://docs.docker.com/engine/install/) on your machine.
 2. Make a new folder and `git pull` this repo.
-3. Create `.env` file in your project root to set env vars.
+3. Create a `.env` file in your project root to set env vars.
 
 ```
 DEBUG= 0
@@ -35,7 +35,7 @@ SQL_HOST=db
 SQL_PORT=5432
 POSTGRES_DATABASE=realtyna
 POSTGRES_USER=realtyna_user
-POSTGRES_PASSWORD='/run/secrects/sql_password'
+POSTGRES_PASSWORD='/run/secrets/sql_password'
 ```
 
 4. Create a new folder called `secrets` in your project root to set docker secrets.
@@ -57,7 +57,7 @@ POSTGRES_PASSWORD='/run/secrects/sql_password'
 - `/room/` : rooms endpoint
   - `/room/<int:pk>/` : room details
 - `/reservation/` : reservations endpoint
-  - `/reservation/<int:pk>/` : reservation detials
+  - `/reservation/<int:pk>/` : reservation details
   - `/reservation/available/` : list of available rooms at a certain time
 
 ## Challenge Review
