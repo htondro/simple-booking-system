@@ -16,8 +16,6 @@ As a listing owner, We need a system for making and tracking reservations that c
 1. Authentication / Authorization is not in the scope of this task
 2. No localization needed
 
----
-
 ## Requirements
 
 - Docker
