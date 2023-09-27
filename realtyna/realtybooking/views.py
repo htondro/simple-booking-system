@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseBadRequest
 from .serializers import OwnerSerializer, ReservationSerializer, RoomSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -8,6 +8,7 @@ from django.utils import timezone
 from datetime import datetime
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.shortcuts import render
 # Create your views here.
 
 
@@ -18,20 +19,24 @@ class OwnerViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def reserved(self, request, pk=None):
         owner = self.get_object()
+
         reserved = Reservation.objects.filter(
             room__owner=owner).prefetch_related('room')
         reserved_rooms = Room.objects.filter(
             pk__in=reserved.values_list('room', flat=True))
+
         room_serializer = RoomSerializer(
             reserved_rooms, many=True)
-        reservation_serializer = ReservationSerializer(reserved, many=True)
-
-        return Response(
-            {
-                'rooms': room_serializer.data,
-                'reservations': reservation_serializer.data
-            }
-        )
+        context = {
+            'owner': {
+                'id': owner.pk,
+                'first_name': owner.first_name,
+                'last_name': owner.last_name,
+                'username': owner.username,
+            },
+            'rooms': room_serializer.data,
+        }
+        return render(request, "realtybooking/reserved.html", context)
 
 
 class RoomViewSet(viewsets.ModelViewSet):

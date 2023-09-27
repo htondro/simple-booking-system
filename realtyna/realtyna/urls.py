@@ -25,6 +25,6 @@ router.register(r"reservation", views.ReservationViewSet)
 router.register(r"owner", views.OwnerViewSet)
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('admin/', admin.site.urls),
+    path('', include(router.urls)),
 ]

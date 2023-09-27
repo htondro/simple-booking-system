@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ owner.username }}'s Rooms Status</title>
+</head>
+
+<body>
+    <ul>
+        {% for room in rooms %}
+        <li>{{ room.name }}</li>
+        <ul>
+            {% for reservation in room.reservations %}
+            <li>{{ reservation.start_date }} - {{ reservation.end_date }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
