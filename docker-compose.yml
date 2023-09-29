@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    container_name: web
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
@@ -24,6 +25,7 @@ services:
     restart: on-failure
 
   nginx:
+    container_name: nginx
     build:
       context: .
       dockerfile: ./compose/local/nginx/Dockerfile
@@ -36,6 +38,7 @@ services:
     restart: on-failure
 
   db:
+    container_name: db
     image: postgres:16-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
