@@ -41,10 +41,10 @@ POSTGRES_PASSWORD='/run/secrets/sql_password'
 4. Create a new folder called `secrets` in your project root to set docker secrets.
    1. Create a `secret_key.txt` file in the secrets folder and put your considered django secret key as plain text in that file.
    2. Create a `sql_password.txt` file in the secrets folder and put your considered SQL password as plain text in that file.
-5. run `docker compose build` in the command line at your root project.
-6. run `docker compose exec db psql -U realtyna_user` to get into the db shell.
+5. run `docker compose build` in the command line to build containers.
+6. run `docker compose up -d` in the command line to run containers.
+7. run `docker compose exec db psql -U realtyna_user` to get into the db shell.
    1. run `CREATE DATABASE realtyna;` in the db shell.
-7. run `docker compose up -d` in the command line to run containers.
 8. run `docker compose exec web python manage.py createsuperuser` to create a django superuser.
 9. Now you can login to the django admin dashboard (`localhost/admin`) to CRUD data.
 
