@@ -1,4 +1,3 @@
-from django.http import HttpResponseBadRequest
 from .serializers import OwnerSerializer, ReservationSerializer, RoomSerializer
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -85,12 +84,11 @@ class ReservationViewSet(viewsets.ModelViewSet):
             start_date__gte=start_date, end_date__lte=end_date, room=room)
 
         if intersecting_reservations.count():
-            return HttpResponseBadRequest(
-                'This reservation intersecting another reservation. Reservations\' PKs: {pk}'.format(
+            return Response(
+                {'error': 'This reservation intersecting another reservation. Reservations\' PKs: {pk}'.format(
                     pk=list(intersecting_reservations.values_list(
                         'pk', flat=True))
-                )
-            )
+                )},status=status.HTTP_400_BAD_REQUEST)
 
         elif including_reservations.count():
             return Response(
