@@ -1,6 +1,6 @@
 from django.http import HttpResponseBadRequest
 from .serializers import OwnerSerializer, ReservationSerializer, RoomSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Room, Reservation
@@ -54,7 +54,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
             request.data.get('date'), "%Y-%m-%d").date()
 
         if certain_date < timezone.now().date():
-            return HttpResponseBadRequest('Date cannot be in the past')
+            return Response({'error': 'Date cannot be in the past'},status=status.HTTP_400_BAD_REQUEST)
 
         else:
             reserved_rooms = Reservation.objects.filter(
@@ -93,25 +93,24 @@ class ReservationViewSet(viewsets.ModelViewSet):
             )
 
         elif including_reservations.count():
-            return HttpResponseBadRequest(
-                'Another reservation includes this reservation. Reservations\' PKs: {pk}'.format(
-                    pk=list(including_reservations.values_list(
-                        'pk', flat=True))
-                )
-            )
+            return Response(
+                {'error': 'Another reservation includes this reservation. Reservations\' PKs: {pk}'.format(pk=list(including_reservations.values_list(
+                        'pk', flat=True)))},status=status.HTTP_400_BAD_REQUEST)
 
         elif included_reservations.count():
-            return HttpResponseBadRequest(
-                'This reservation includes another reservation. Reservations\' PKs: {pk}'.format(
+            return Response(
+                {'error': 'This reservation includes another reservation. Reservations\' PKs: {pk}'.format(
                     pk=list(included_reservations.values_list(
                         'pk', flat=True))
-                )
-            )
+                )},status=status.HTTP_400_BAD_REQUEST)
 
         elif start_date < timezone.now().date():
-            return HttpResponseBadRequest('Start date cannot be in the past')
+            return Response(
+                {'error': 'Start date cannot be in the past'},status=status.HTTP_400_BAD_REQUEST)
+            
         elif end_date < start_date:
-            return HttpResponseBadRequest(
-                'End date cannot be less than start date')
+            return Response(
+                {'error': 'End date cannot be less than start date'},status=status.HTTP_400_BAD_REQUEST)
+                
         else:
             return super().create(request, *args, **kwargs)
