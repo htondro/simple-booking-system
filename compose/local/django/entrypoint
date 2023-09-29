@@ -15,7 +15,7 @@ import psycopg2
 
 try:
     psycopg2.connect(
-        dbname="${POSTGRES_DATABASE}",
+        dbname="${POSTGRES_DB}",
         user="${POSTGRES_USER}",
         password="${POSTGRES_PASSWORD}",
         host="${SQL_HOST}",

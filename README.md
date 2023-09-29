@@ -33,7 +33,7 @@ DJANGO_ALLOWED_HOSTS=*
 SQL_ENGINE=django.db.backends.postgresql
 SQL_HOST=db
 SQL_PORT=5432
-POSTGRES_DATABASE=realtyna
+POSTGRES_DB=realtyna
 POSTGRES_USER=realtyna_user
 POSTGRES_PASSWORD='/run/secrets/sql_password'
 ```
@@ -43,10 +43,8 @@ POSTGRES_PASSWORD='/run/secrets/sql_password'
    2. Create a `sql_password.txt` file in the secrets folder and put your considered SQL password as plain text in that file.
 5. run `docker compose build` in the command line to build containers.
 6. run `docker compose up -d` in the command line to run containers.
-7. run `docker compose exec db psql -U realtyna_user` to get into the db shell.
-   1. run `CREATE DATABASE realtyna;` in the db shell.
-8. run `docker compose exec web python manage.py createsuperuser` to create a django superuser.
-9. Now you can login to the django admin dashboard (`localhost/admin`) to CRUD data.
+7. run `docker compose exec web python manage.py createsuperuser` to create a django superuser.
+8. Now you can login to the django admin dashboard (`localhost/admin`) to CRUD data.
 
 ## REST API Endpoints
 
